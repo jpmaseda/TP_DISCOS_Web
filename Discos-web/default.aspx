@@ -9,7 +9,7 @@
           {%>
             <div class="col">
                 <div class="card">
-                    <img src="<%: disco.UrlImagenTapa %>" class="card-img-top" alt="...">
+                    <img src="<%: disco.UrlImagenTapa %>" class="card-img-top" alt="<%: disco.Titulo %>">
                     <div class="card-body">
                         <h5 class="card-title"><%: disco.Titulo %></h5>
                         <p class="card-text">

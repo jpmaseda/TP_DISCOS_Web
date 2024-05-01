@@ -12,8 +12,12 @@ namespace Discos_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DiscosNegocio negocio = new DiscosNegocio();
-            dgvDiscos.DataSource = negocio.listarSP();
+            if (Session["listaDiscos"] == null)
+            {
+                DiscosNegocio negocio = new DiscosNegocio();
+                Session.Add("listaDiscos", negocio.listarSP());
+            }
+            dgvDiscos.DataSource = Session["listaDiscos"];
             dgvDiscos.DataBind();
         }
     }

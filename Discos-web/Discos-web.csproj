@@ -69,7 +69,7 @@
   <ItemGroup>
     <Content Include="FormularioDisco.aspx" />
     <Content Include="default.aspx" />
-    <Content Include="DicosLista.aspx" />
+    <Content Include="DiscosLista.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -87,12 +87,12 @@
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DicosLista.aspx.cs">
-      <DependentUpon>DicosLista.aspx</DependentUpon>
+    <Compile Include="DiscosLista.aspx.cs">
+      <DependentUpon>DiscosLista.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DicosLista.aspx.designer.cs">
-      <DependentUpon>DicosLista.aspx</DependentUpon>
+    <Compile Include="DiscosLista.aspx.designer.cs">
+      <DependentUpon>DiscosLista.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Master.Master.cs">

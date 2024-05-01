@@ -4,24 +4,42 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
-        <div class="col"></div>
-        <div class="col-7">
+        <div class="col-3"></div>
+        <div class="col-6">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <label for="txtTitulo" class="form-label">Título</label>
+                <asp:TextBox ID="txtTitulo" Class="form-control" runat="server" required=""></asp:TextBox>
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="txtCanciones" class="form-label">Cantidad de canciones</label>
+                <asp:TextBox ID="txtCanciones" type="number" min="1" value="1" Class="form-control" runat="server" required=""></asp:TextBox>
             </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <div class="mb-3">
+                <label class="form-label" for="txtLanzamiento">Fecha de lanzamiento</label>
+                <asp:TextBox ID="txtLanzamiento" CssClass="form-control" runat="server" TextMode="Date" required=""></asp:TextBox>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="mb-3">
+                <label for="txtUrlImagen" class="form-label">Imagen de tapa</label>
+                <asp:TextBox ID="txtUrlImagen" type="url" placeholder="https://ejemplo.com" pattern="https://.*" Class="form-control" runat="server" required=""></asp:TextBox>
+            </div>
+            <div class="mb-3">
+                <label for="ddlEstilo" class="form-label">Estilo</label>
+                <asp:DropDownList ID="ddlEstilo" CssClass="form-select" runat="server"></asp:DropDownList>
+            </div>
+            <div class="mb-3">
+                <label for="ddlEdicion" class="form-label">Edición</label>
+                <asp:DropDownList ID="ddlEdicion" CssClass="form-select" runat="server"></asp:DropDownList>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-4">
+                    <asp:Button ID="bntAgregar" OnClick="bntAgregar_Click" class="btn btn-primary" runat="server" Text="Agregar" />
+                    <a href="default.aspx">Cancelar</a>
+                </div>
+                <div class="col-4">
+                    <asp:Button ID="btnModificar" class="btn btn-primary" runat="server" Text="Modificar" />
+                    <asp:Button ID="btnEliminar" class="btn btn-primary" runat="server" Text="Eliminar" />
+                </div></div>
         </div>
-        <div class="col"></div>
-
+        <div class="col-3"></div>
     </div>
 </asp:Content>

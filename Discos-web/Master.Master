@@ -20,7 +20,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="default.aspx">Inicio</a>
-                        <a class="nav-link" href="DicosLista.aspx">Lista de discos</a>
+                        <a class="nav-link" href="DiscosLista.aspx">Lista de discos</a>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Acciones
                             </a>
