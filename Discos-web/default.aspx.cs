@@ -14,8 +14,26 @@ namespace Discos_web
         public List<Disco> ListaDiscos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            DiscosNegocio negocio = new DiscosNegocio();
-            ListaDiscos = negocio.listarSP();
+            //if (Session["listaDiscos"] == null)
+            //{
+            //    DiscosNegocio negocio = new DiscosNegocio();
+            //    Session.Add("listaDiscos", negocio.listarSP());
+            //}
+            ////DiscosNegocio negocio = new DiscosNegocio();
+            //ListaDiscos = (List<Disco>)Session["listaDiscos"];
+            try
+            {
+                DiscosNegocio negocio = new DiscosNegocio();
+                ListaDiscos = negocio.listarSP();
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw;
+            }
+
+
         }
     }
 }

@@ -88,6 +88,29 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        public void agregarSP(Disco disco)
+        {
+            try
+            {
+                datos.setearProcedimiento("altaDisco");
+                datos.setearParametro("@titulo", disco.Titulo);
+                datos.setearParametro("@fechalanzamiento", disco.FechaLanzamiento);
+                datos.setearParametro("@cantidadcanciones", disco.CantidadCanciones);
+                datos.setearParametro("@urlimagentapa", disco.UrlImagenTapa);
+                datos.setearParametro("@idestilo", disco.Estilo.Id);
+                datos.setearParametro("@idtipoedicion", disco.Edicion.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void modificar(Disco disco)
         {            
             try
@@ -122,7 +145,23 @@ namespace negocio
             }
             catch (Exception ex)
             {
-
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void eliminarSP(int id)
+        {
+            try
+            {
+                datos.setearProcedimiento("eliminarFisico");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
             finally
