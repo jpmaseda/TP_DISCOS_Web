@@ -135,6 +135,30 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        public void modificarSP(Disco disco)
+        {
+            try
+            {
+                datos.setearProcedimiento("modificarDisco");
+                datos.setearParametro("@Titulo", disco.Titulo);
+                datos.setearParametro("@Año", disco.FechaLanzamiento);
+                datos.setearParametro("@Canciones", disco.CantidadCanciones);
+                datos.setearParametro("@UrlTapa", disco.UrlImagenTapa);
+                datos.setearParametro("@Estilo", disco.Estilo.Id);
+                datos.setearParametro("@Edicion", disco.Edicion.Id);
+                datos.setearParametro("@Id", disco.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void eliminar(int id)
         {
             try

@@ -31,6 +31,11 @@
                 <label for="ddlEdicion" class="form-label">Edición</label>
                 <asp:DropDownList ID="ddlEdicion" CssClass="form-select" runat="server"></asp:DropDownList>
             </div>
+            <div class="mb-3">
+                <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-outline-primary" runat="server" Text="Aceptar" />
+                <a href="DiscosLista.aspx">Cancelar</a>
+                <asp:Button ID="btnInactivar" OnClick="btnInactivar_Click" CssClass="btn btn-outline-warning" runat="server" Text="Inactivar" />
+            </div>
         </div>
         <div class="col-6">
             <asp:UpdatePanel runat="server">
@@ -40,20 +45,31 @@
                         <asp:TextBox ID="txtUrlImagen" OnTextChanged="txtUrlImagen_TextChanged" AutoPostBack="true" type="url" placeholder="https://ejemplo.com" pattern="https://.*" Class="form-control" runat="server" required=""></asp:TextBox>
                     </div>
                     <div class="mb-3">
-                        <asp:Image ID="imgTapa" CssClass="img-thumbnail img-fluid" ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png" runat="server" />
+                        <asp:Image ID="imgTapa" CssClass="img-thumbnail img-fluid" ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png" runat="server" Width="450px" />
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
     </div>
-    <div class="row justify-content-between">
+    <div class="row">
         <div class="col-6">
-            <asp:Button ID="btnAgregar" OnClick="btnAgregar_Click" class="btn btn-primary" runat="server" Text="Agregar" />
-            <a href="default.aspx">Cancelar</a>
-        </div>
-        <div class="col-6">
-            <asp:Button ID="btnModificar" class="btn btn-primary" runat="server" Text="Modificar" />
-            <asp:Button ID="btnEliminar" class="btn btn-primary" runat="server" Text="Eliminar Físico" OnClick="btnEliminar_Click" />
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                    <div class="mb-3">
+                        <asp:Button ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-outline-danger" Text="Eliminar" runat="server" />
+                    </div>
+                    <%if (CheckConfirmar)
+                        {%>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="chkConfimarEliminar" runat="server">
+                        <label class="form-check-label" for="chkConfimarEliminar">
+                            Confirmo que deseo eliminar de la DB
+                        </label>
+                        <asp:Button ID="btnConfEliminar" CssClass="btn btn-danger" runat="server" Text="Confimar" OnClick="btnConfEliminar_Click" />
+                    </div>                    
+                    <%} %>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
     </div>
 </asp:Content>
