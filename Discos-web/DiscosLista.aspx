@@ -19,6 +19,7 @@
             <asp:BoundField HeaderText="Cantidad de canciones" DataField="CantidadCanciones" />
             <asp:BoundField HeaderText="Estilo" DataField="Estilo.Descripcion" />
             <asp:BoundField HeaderText="Edición" DataField="Edicion.Descripcion" />
+            <asp:CheckBoxField HeaderText="Activo" DataField="Activo" />
             <asp:CommandField ShowSelectButton="true" HeaderText="Acción" />
         </Columns>
     </asp:GridView>

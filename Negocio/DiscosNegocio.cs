@@ -13,7 +13,7 @@ namespace negocio
     public class DiscosNegocio
     {
         private AccesoDatos datos = new AccesoDatos();
-        public List<Disco> listar()
+        public List<Disco> listarActivos()
         {
             //SqlConnection conexion = new SqlConnection();
             //SqlCommand comando = new SqlCommand();
@@ -211,6 +211,24 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        public void reactivar(int id)
+        {
+            try
+            {
+                datos.setearConsulta("update DISCOS set Activo = 1 where Id = @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
 
         public List<Disco> filtrar(string campo, string criterio, string filtro)
         {
@@ -313,6 +331,7 @@ namespace negocio
                     aux.Estilo = new Estilo();
                     aux.Estilo.Id = (int)datos.Lector["IdEstilo"];
                     aux.Estilo.Descripcion = (string)datos.Lector["Estilo"];
+                    aux.Activo = (bool)datos.Lector["Activo"];
 
                     lista.Add(aux);
                 }

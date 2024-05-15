@@ -21,6 +21,6 @@ namespace dominio
         public Estilo Estilo { get; set; }
         [DisplayName("Edición")]
         public Edicion Edicion { get; set; }
-
+        public bool Activo { get; set; }
     }
 }

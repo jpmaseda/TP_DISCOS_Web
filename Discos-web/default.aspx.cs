@@ -24,7 +24,7 @@ namespace Discos_web
             try
             {
                 DiscosNegocio negocio = new DiscosNegocio();
-                ListaDiscos = negocio.listarSP();
+                ListaDiscos = negocio.listarActivos();
 
             }
             catch (Exception ex)

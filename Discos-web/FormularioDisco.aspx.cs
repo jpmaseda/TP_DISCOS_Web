@@ -14,13 +14,13 @@ namespace Discos_web
 {
     public partial class AgregarDisco : System.Web.UI.Page
     {
-        public bool CheckConfirmar { get; set; }             
+        public bool CheckConfirmar { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             CheckConfirmar = false;
             btnEliminar.Enabled = false;
             btnInactivar.Enabled = false;
-            if(txtId.Text != "")
+            if (txtId.Text != "")
                 btnEliminar.Enabled = true;
             //txtLanzamiento.Attributes.Add("onBlur", "__doPostBack('txtLanzamiento','');");
             try
@@ -47,6 +47,7 @@ namespace Discos_web
             }
             if (Session["Id"] != null)
             {
+                btnAceptar.Text = "Modificar";
                 btnEliminar.Enabled = true;
                 btnInactivar.Enabled = true;
                 List<Disco> temporal = (List<Disco>)Session["listaDiscos"];
@@ -60,6 +61,8 @@ namespace Discos_web
                 ddlEstilo.SelectedValue = seleccionado.Estilo.Id.ToString();
                 ddlEdicion.SelectedValue = seleccionado.Edicion.Id.ToString();
                 imgTapa.ImageUrl = txtUrlImagen.Text;
+                if (seleccionado.Activo == false)
+                    btnInactivar.Text = "Reactivar";
                 Session["Id"] = null;
             }
             //if (Request.QueryString["Id"] != null)
@@ -122,7 +125,7 @@ namespace Discos_web
 
         protected void txtUrlImagen_TextChanged(object sender, EventArgs e)
         {
-            imgTapa.ImageUrl = txtUrlImagen.Text;            
+            imgTapa.ImageUrl = txtUrlImagen.Text;
         }
 
         protected void btnConfEliminar_Click(object sender, EventArgs e)
@@ -143,18 +146,22 @@ namespace Discos_web
             }
 
         }
-        protected void txtLanzamiento_TextChanged(object sender, EventArgs e)
-        {
-            //Valida rango posible para smalldatetime
-            if (DateTime.Parse(txtLanzamiento.Text) < DateTime.Parse("1900 / 01 / 01"))
-                lblLanzamiento.Text = "La fecha debe ser mayor al 01/01/1900";
-            else if (DateTime.Parse(txtLanzamiento.Text) > DateTime.Parse("2079 / 06 / 06"))
-                lblLanzamiento.Text = "La fecha debe ser menor al 06/06/2079";
-        }
-
         protected void btnInactivar_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                DiscosNegocio negocio = new DiscosNegocio();
+                if (btnInactivar.Text == "Reactivar")
+                    negocio.reactivar(int.Parse(txtId.Text.ToString()));
+                else
+                    negocio.eliminarLogico(int.Parse(txtId.Text.ToString()));
+                Response.Redirect("DiscosLista.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw;
+            }
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
