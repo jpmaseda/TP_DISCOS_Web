@@ -53,6 +53,7 @@ namespace Discos_web
                 List<Disco> temporal = (List<Disco>)Session["listaDiscos"];
                 int id = int.Parse(Session["Id"].ToString());
                 Disco seleccionado = temporal.Find(x => x.Id == id);
+                Session.Add("discoSeleccionado", seleccionado); 
                 txtId.Text = seleccionado.Id.ToString();
                 txtTitulo.Text = seleccionado.Titulo;
                 txtCanciones.Text = seleccionado.CantidadCanciones.ToString();
@@ -151,10 +152,12 @@ namespace Discos_web
             try
             {
                 DiscosNegocio negocio = new DiscosNegocio();
-                if (btnInactivar.Text == "Reactivar")
-                    negocio.reactivar(int.Parse(txtId.Text.ToString()));
-                else
-                    negocio.eliminarLogico(int.Parse(txtId.Text.ToString()));
+                Disco seleccionado = (Disco)Session["discoSeleccionado"];
+                negocio.eliminarLogico(seleccionado.Id, !seleccionado.Activo);
+                //if (btnInactivar.Text == "Reactivar")
+                //    negocio.eliminarLogico(int.Parse(txtId.Text.ToString()), true);
+                //else
+                //    negocio.eliminarLogico(int.Parse(txtId.Text.ToString()));
                 Response.Redirect("DiscosLista.aspx", false);
             }
             catch (Exception ex)

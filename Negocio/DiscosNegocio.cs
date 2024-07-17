@@ -193,12 +193,13 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-        public void eliminarLogico(int id)
+        public void eliminarLogico(int id, bool activo = false)
         {
             try
             {
-                datos.setearConsulta("update DISCOS set Activo = 0 where Id = @Id");
+                datos.setearConsulta("update DISCOS set Activo = @activo where Id = @Id");
                 datos.setearParametro("@Id", id);
+                datos.setearParametro("@activo", activo);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -211,25 +212,7 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-        public void reactivar(int id)
-        {
-            try
-            {
-                datos.setearConsulta("update DISCOS set Activo = 1 where Id = @Id");
-                datos.setearParametro("@Id", id);
-                datos.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
+       
         public List<Disco> filtrar(string campo, string criterio, string filtro)
         {
             string consulta = "Select Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion Estilo, T.Descripcion TipoEdicion, E.Id IdEstilo, T.Id IdEdicion, D.Id from DISCOS D, ESTILOS E, TIPOSEDICION T where E.Id = D.IdEstilo AND T.Id = D.IdTipoEdicion AND D.Activo = 1 ";

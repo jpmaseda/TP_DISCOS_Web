@@ -22,9 +22,8 @@ namespace Discos_web
             try
             {
             DiscosNegocio negocio = new DiscosNegocio();
-            List<Disco> lista = negocio.listarSP();
-            Session.Add("listaDiscos", lista);
-            dgvDiscos.DataSource = lista;
+            Session.Add("listaDiscos", negocio.listarSP());
+            dgvDiscos.DataSource = Session["listaDiscos"];
             dgvDiscos.DataBind();
             }
             catch (Exception ex)
@@ -40,6 +39,31 @@ namespace Discos_web
             Session.Add("Id", id);
             Response.Redirect("FormularioDisco.aspx", false);
             //Response.Redirect("FormularioDisco.aspx?Id=" + id, false);
+        }
+
+        protected void dgvDiscos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvDiscos.PageIndex = e.NewPageIndex;
+            dgvDiscos.DataBind();
+        }
+
+        protected void txtFiltrar_TextChanged(object sender, EventArgs e)
+        {
+            List<Disco> lista = new List<Disco>();
+            if (rdbActivo.Checked)
+            {
+                lista = ((List<Disco>)Session["listaDiscos"]).FindAll(x => x.Activo.Equals(true) && (x.Titulo.ToUpper().Contains(txtFiltrar.Text.ToUpper()) || x.Estilo.Descripcion.ToUpper().Contains(txtFiltrar.Text.ToUpper())));
+            }
+            else if(rdbInactivo.Checked)
+            {
+                lista = ((List<Disco>)Session["listaDiscos"]).FindAll(x => x.Activo.Equals(false) && (x.Titulo.ToUpper().Contains(txtFiltrar.Text.ToUpper()) || x.Estilo.Descripcion.ToUpper().Contains(txtFiltrar.Text.ToUpper())));
+            }
+            else
+            {
+                lista = ((List<Disco>)Session["listaDiscos"]).FindAll(x => x.Titulo.ToUpper().Contains(txtFiltrar.Text.ToUpper()) || x.Estilo.Descripcion.ToUpper().Contains(txtFiltrar.Text.ToUpper()));
+            }
+            dgvDiscos.DataSource = lista;
+            dgvDiscos.DataBind();
         }
     }
 }
