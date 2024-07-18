@@ -213,9 +213,9 @@ namespace negocio
             }
         }
        
-        public List<Disco> filtrar(string campo, string criterio, string filtro)
+        public List<Disco> filtrar(string campo, string criterio, string filtro, string activo)
         {
-            string consulta = "Select Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion Estilo, T.Descripcion TipoEdicion, E.Id IdEstilo, T.Id IdEdicion, D.Id from DISCOS D, ESTILOS E, TIPOSEDICION T where E.Id = D.IdEstilo AND T.Id = D.IdTipoEdicion AND D.Activo = 1 ";
+            string consulta = "Select Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion Estilo, T.Descripcion TipoEdicion, E.Id IdEstilo, T.Id IdEdicion, D.Id, D.Activo from DISCOS D, ESTILOS E, TIPOSEDICION T where E.Id = D.IdEstilo AND T.Id = D.IdTipoEdicion ";
             List<Disco> lista = new List<Disco>();
             try
             {
@@ -232,7 +232,7 @@ namespace negocio
                                 consulta += "AND FechaLanzamiento < '" + filtro + "1231'";
                                 break;
                             default:
-                                consulta += "AND FechaLanzamiento < '" + filtro + "1231' AND FechaLanzamiento > '" + filtro + "0101'";
+                                consulta += "AND FechaLanzamiento <= '" + filtro + "1231' AND FechaLanzamiento >= '" + filtro + "0101'";
                                 break;                            
                         }
                     }
@@ -256,7 +256,11 @@ namespace negocio
                 {
                     consulta += "AND E.Descripcion = '" + criterio + "'";
                 }
-                
+                if (activo == "Activo")
+                    consulta += "AND D.Activo = 1";
+                else if (activo == "Inactivo")
+                    consulta += "AND D.Activo = 0";
+
                 datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -274,7 +278,7 @@ namespace negocio
                     aux.Estilo = new Estilo();
                     aux.Estilo.Id = (int)datos.Lector["IdEstilo"];
                     aux.Estilo.Descripcion = (string)datos.Lector["Estilo"];
-
+                    aux.Activo = bool.Parse(datos.Lector["Activo"].ToString());
                     lista.Add(aux);
                 }                
                 return lista;

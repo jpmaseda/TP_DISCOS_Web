@@ -4,8 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
-    <%-- <style>
-        .oculto{
+    <%--<style>
+        .oculto {
             display: none;
         }
     </style>--%>
@@ -14,7 +14,8 @@
     <br />
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <div class="row">
+
+            <div class="row align-items-end">
                 <div class="col-6">
                     <div class="mb-3">
                         <asp:Label Text="Filtrar" CssClass="form-label" runat="server" />
@@ -22,16 +23,63 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <br />
-                    <div class="mb-3 btn-group">
-                        <asp:RadioButton Text="Activo" ID="rdbActivo" GroupName="Activo" CssClass="btn btn-outline-primary" runat="server" />
-                        <asp:RadioButton Text="Inactivo" ID="rdbInactivo" GroupName="Activo" CssClass="btn btn-outline-primary" runat="server" />
-                        <asp:RadioButton Text="Todos" ID="rdbTodos" Checked="true" GroupName="Activo" CssClass="btn btn-outline-primary" runat="server" />
+                    <div class="mb-3 form-control-plaintext">
+                        <asp:CheckBox ID="chkFiltroAvanzado" CssClass="" runat="server" AutoPostBack="true" />
+                        <asp:Label Text="Filtro avanzado" runat="server" />
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar filtros" CssClass="btn btn-secondary" OnClick="btnLimpiar_Click" />
                     </div>
                 </div>
             </div>
+            <%if (chkFiltroAvanzado.Checked)
+                { %>
+            <div class="row">
+                <div class="col-3">
+                    <div class="mb-3">
+                        <asp:Label Text="Campo" runat="server" />
+                        <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCampo" AutoPostBack="true" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged">
+                            <asp:ListItem Text="Título" />
+                            <asp:ListItem Text="Año de lanzamiento" />
+                            <asp:ListItem Text="Estilo" />
+                        </asp:DropDownList>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <asp:Label Text="Criterio" runat="server" />
+                        <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCriterio">
+                            <asp:ListItem Text="Comienza con" />
+                            <asp:ListItem Text="Termina con" />
+                            <asp:ListItem Text="Contiene" />
+                        </asp:DropDownList>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <asp:Label Text="Filtro" runat="server" />
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroAvanzado" />
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <asp:Label Text="Estado" runat="server" />
+                        <asp:DropDownList runat="server" CssClass="form-control" ID="ddlEstado">
+                            <asp:ListItem Text="Activo" />
+                            <asp:ListItem Text="Inactivo" />
+                            <asp:ListItem Text="Todos" Selected="True" />
+                        </asp:DropDownList>
+                    </div>
+                </div>
+            </div>
+            <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscar_Click" />
+            <asp:Label ID="lblFecha" ForeColor="Red" runat="server" />
             <br />
-            <asp:GridView ID="dgvDiscos" CssClass="table" DataKeyNames="Id" runat="server" OnSelectedIndexChanged="dgvDiscos_SelectedIndexChanged"
+            <%} %>
+            <br />
+            <asp:GridView ID="dgvDiscos" CssClass="table table-striped table-hover" DataKeyNames="Id" runat="server" OnSelectedIndexChanged="dgvDiscos_SelectedIndexChanged"
                 AutoGenerateColumns="false" OnPageIndexChanging="dgvDiscos_PageIndexChanging" AllowPaging="true" PageSize="5">
                 <Columns>
                     <%--<asp:BoundField HeaderText="Id" DataField="Id" HeaderStyle-CssClass="oculto" ItemStyle-CssClass="oculto" />--%>
