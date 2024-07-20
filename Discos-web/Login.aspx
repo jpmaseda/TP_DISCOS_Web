@@ -10,14 +10,14 @@
             <br />
             <div class="mb-3">
                 <label for="txtUsuario" class="form-label">Usuario</label>
-                <asp:TextBox ID="txtUsuario1" CssClass="form-control" REQUIRED="" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtUsuario" placeholder="Nombre de usuario" CssClass="form-control" REQUIRED="" runat="server"></asp:TextBox>
             </div>
             <div class="mb-3">
                 <label class="form-label">Contraseña</label>
-                <asp:TextBox ID="TextBox2" CssClass="form-control" type="password" runat="server" />
+                <asp:TextBox ID="txtPass" placeholder="********" CssClass="form-control" type="password" runat="server" />
             </div>
-            <asp:Button Text="Aceptar" CssClass="btn btn-primary" runat="server" />
-            <a href="/">Cancelar</a>
+            <asp:Button Text="Ingresar" CssClass="btn btn-primary" ID="btnIngresar" OnClick="btnIngresar_Click" runat="server" />
+            <a class="form-control-color" href="/">Volver al inicio</a>
         </div>
     </div>
 </asp:Content>

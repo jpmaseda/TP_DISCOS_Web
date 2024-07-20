@@ -32,7 +32,7 @@ namespace Discos_web
                 }
                 catch (Exception ex)
                 {
-                    Session.Add("error", ex);
+                    Session.Add("error", ex.ToString());
                     Response.Redirect("Error.aspx", false);
                 }
             }
@@ -118,7 +118,7 @@ namespace Discos_web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
         }

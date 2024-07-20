@@ -11,34 +11,34 @@ namespace Discos_web
 {
 
 
-    public partial class Login
+    public partial class MenuLogin
     {
 
         /// <summary>
-        /// txtUsuario control.
+        /// btnUsuario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUsuario;
+        protected global::System.Web.UI.WebControls.Button btnUsuario;
 
         /// <summary>
-        /// txtPass control.
+        /// btnAdmin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPass;
+        protected global::System.Web.UI.WebControls.Button btnAdmin;
 
         /// <summary>
-        /// btnIngresar control.
+        /// btnCerrar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIngresar;
+        protected global::System.Web.UI.WebControls.Button btnCerrar;
     }
 }
