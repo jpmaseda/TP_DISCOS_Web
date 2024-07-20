@@ -33,7 +33,7 @@ namespace Discos_web
                 catch (Exception ex)
                 {
                     Session.Add("error", ex);
-                    throw;
+                    Response.Redirect("Error.aspx", false);
                 }
             }
         }
@@ -48,6 +48,10 @@ namespace Discos_web
 
         protected void dgvDiscos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            if (Session["listaFiltrada"] != null)
+                dgvDiscos.DataSource = Session["listaFiltrada"];
+            else
+                dgvDiscos.DataSource = Session["listaDiscos"];
             dgvDiscos.PageIndex = e.NewPageIndex;
             dgvDiscos.DataBind();
         }
@@ -55,52 +59,67 @@ namespace Discos_web
         protected void txtFiltrar_TextChanged(object sender, EventArgs e)
         {
             List<Disco> lista = ((List<Disco>)Session["listaDiscos"]).FindAll(x => x.Titulo.ToUpper().Contains(txtFiltrar.Text.ToUpper()) || x.Estilo.Descripcion.ToUpper().Contains(txtFiltrar.Text.ToUpper()));
+            if(txtFiltrar.Text == "")
+                dgvDiscos.PageSize = 5;
+            else
+                dgvDiscos.PageSize = 20;
             dgvDiscos.DataSource = lista;
             dgvDiscos.DataBind();
         }
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
+            Session["listaFiltrada"] = null;
+            dgvDiscos.PageSize = 5;
             dgvDiscos.DataSource = Session["listaDiscos"];
             dgvDiscos.DataBind();
             txtFiltrar.Text = "";
             txtFiltroAvanzado.Text = "";
             ddlCampo.Text = "Título";
             ddlCriterio.Items.Clear();
+            ddlCriterio.Items.Add("Comienza con");
+            ddlCriterio.Items.Add("Termina con");
+            ddlCriterio.Items.Add("Contiene");
+            ddlCriterio.SelectedIndex = 0;
             ddlEstado.Text = "Todos";
             lblFecha.Text = "";
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
+            dgvDiscos.PageSize = 5;
             int valorSalida = 1;
             lblFecha.Text = "";
-            if (ddlCampo.Text == "Año de lanzamiento" && !int.TryParse(txtFiltroAvanzado.Text, out valorSalida))
+            if (ddlCampo.Text == "Año de lanzamiento")
             {
-                lblFecha.Text = "El filtro debe contener números.";
-                return;
-            }
-            if (int.Parse(txtFiltroAvanzado.Text) >= 2079)
-            {
-                lblFecha.Text = "El año debe ser menor al 2079.";
-                return;
-            }
-            else if (int.Parse(txtFiltroAvanzado.Text) <= 1900)
-            {
-                lblFecha.Text = "El año debe ser mayor al 1900.";
-                return;
+                if (!int.TryParse(txtFiltroAvanzado.Text, out valorSalida))
+                {
+                    lblFecha.Text = "El filtro debe contener números.";
+                    return;
+                }
+                else if (int.Parse(txtFiltroAvanzado.Text) >= 2079)
+                {
+                    lblFecha.Text = "El año debe ser menor al 2079.";
+                    return;
+                }
+                else if (int.Parse(txtFiltroAvanzado.Text) <= 1900)
+                {
+                    lblFecha.Text = "El año debe ser mayor al 1900.";
+                    return;
+                }
             }
             try
             {
                 DiscosNegocio negocio = new DiscosNegocio();
                 List<Disco> lista = (List<Disco>)negocio.filtrar(ddlCampo.Text, ddlCriterio.Text, txtFiltroAvanzado.Text, ddlEstado.Text);
+                Session.Add("listaFiltrada", lista);
                 dgvDiscos.DataSource = lista;
                 dgvDiscos.DataBind();
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex);
-                throw;
+                Response.Redirect("Error.aspx", false);
             }
         }
 

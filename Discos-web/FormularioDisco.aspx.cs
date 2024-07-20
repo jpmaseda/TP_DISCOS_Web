@@ -42,7 +42,7 @@ namespace Discos_web
             catch (Exception ex)
             {
                 Session.Add("error", ex);
-                throw;
+                Response.Redirect("Error.aspx", false);
                 //redireccionar a pantalla de error
             }
             if (Session["Id"] != null)
@@ -120,7 +120,7 @@ namespace Discos_web
             catch (Exception ex)
             {
                 Session.Add("error", ex);
-                throw;
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -142,7 +142,7 @@ namespace Discos_web
                 catch (Exception ex)
                 {
                     Session.Add("error", ex);
-                    throw;
+                    Response.Redirect("Error.aspx", false);
                 }
             }
 
@@ -163,7 +163,7 @@ namespace Discos_web
             catch (Exception ex)
             {
                 Session.Add("error", ex);
-                throw;
+                Response.Redirect("Error.aspx", false);
             }
         }
 

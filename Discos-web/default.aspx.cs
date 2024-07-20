@@ -30,7 +30,7 @@ namespace Discos_web
             catch (Exception ex)
             {
                 Session.Add("error", ex);
-                throw;
+                Response.Redirect("Error.aspx", false);
             }
 
 

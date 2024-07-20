@@ -4,6 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <br />
     <div class="row">
         <div class="col-6">
             <div class="mb-3">
@@ -33,7 +34,7 @@
             </div>
             <div class="mb-3">
                 <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-outline-primary" runat="server" Text="Aceptar" />
-                <a href="DiscosLista.aspx">Cancelar</a>
+                <a class="form-control-color" href="DiscosLista.aspx">Cancelar</a>
                 <asp:Button ID="btnInactivar" OnClick="btnInactivar_Click" CssClass="btn btn-outline-warning" runat="server" Text="Inactivar" />
             </div>
         </div>
@@ -62,10 +63,10 @@
                         {%>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="chkConfimarEliminar" runat="server">
-                        <label class="form-check-label" for="chkConfimarEliminar">
+                        <label class="form-check-label form-check-inline" for="chkConfimarEliminar">
                             Confirmo que deseo eliminar de la DB
                         </label>
-                        <asp:Button ID="btnConfEliminar" CssClass="btn btn-danger" runat="server" Text="Confimar" OnClick="btnConfEliminar_Click" />
+                        <asp:Button ID="btnConfEliminar" CssClass="btn btn-danger align-top" runat="server" Text="Confimar" OnClick="btnConfEliminar_Click" />
                     </div>                    
                     <%} %>
                 </ContentTemplate>

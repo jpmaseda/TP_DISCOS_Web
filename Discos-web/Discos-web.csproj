@@ -67,12 +67,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Error.aspx" />
     <Content Include="FormularioDisco.aspx" />
     <Content Include="default.aspx" />
     <Content Include="DiscosLista.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FormularioDisco.aspx.cs">
       <DependentUpon>FormularioDisco.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -93,6 +102,13 @@
     </Compile>
     <Compile Include="DiscosLista.aspx.designer.cs">
       <DependentUpon>DiscosLista.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Master.Master.cs">
