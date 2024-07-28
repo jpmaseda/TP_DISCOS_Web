@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominio;
 using negocio;
+using Negocio;
 
 namespace Discos_web
 {
@@ -19,6 +20,12 @@ namespace Discos_web
             //    Session.Add("listaDiscos", negocio.listarSP());
             //}
             //dgvDiscos.DataSource = Session["listaDiscos"];
+            if (!Seguridad.esAdmin(Session["usuario"]))
+            {
+                Session.Add("error", "Necesitas permisos de admin para ver esta página.");
+                Response.Redirect("Error.aspx", false);
+            }
+
             if (!IsPostBack)
             {
                 try

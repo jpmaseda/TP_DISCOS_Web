@@ -9,7 +9,7 @@
             <h1>Login</h1>
             <br />
             <div class="mb-3">
-                <label for="txtUsuario" class="form-label">Usuario</label>
+                <label for="txtUsuario" class="form-label">Email</label>
                 <asp:TextBox ID="txtUsuario" placeholder="Nombre de usuario" CssClass="form-control" REQUIRED="" runat="server"></asp:TextBox>
             </div>
             <div class="mb-3">
