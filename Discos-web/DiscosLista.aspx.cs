@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominio;
 using negocio;
-using Negocio;
 
 namespace Discos_web
 {

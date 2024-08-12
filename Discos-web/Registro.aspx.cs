@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominio;
-using Negocio;
+using negocio;
 
 namespace Discos_web
 {
@@ -25,11 +25,13 @@ namespace Discos_web
                 usuario.Email = txtEmail.Text;
                 usuario.Pass = txtPass.Text;
                 usuario.Id = negocio.registrarUsuario(usuario);
-                if (negocio.logear(usuario))
-                {
-                    Session.Add("usuario", usuario);
-                    Response.Redirect("MenuLogin.aspx", false);
-                }
+                Session.Add("usuario", usuario);
+                Response.Redirect("MenuLogin.aspx", false);
+                //if (negocio.logear(usuario))
+                //{
+                //    Session.Add("usuario", usuario);
+                //    Response.Redirect("MenuLogin.aspx", false);
+                //}
             }
             catch (Exception ex)
             {
