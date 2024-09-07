@@ -9,7 +9,7 @@
         <div class="col-md-4">
             <div class="mb-3">
                 <label for="txtEmail" class="form-label">Email</label>
-                <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" Enabled="false" ></asp:TextBox>
             </div>
             <div class="mb-3">
                 <label for="txtNombreUsuario" class="form-label">Nombre de Usuario</label>
